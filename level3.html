@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDGs 性別平權學習證書</title>
+<style>
+    body {
+        font-family: 'Microsoft JhengHei', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #fdf6e3; /* 淡雅紙張底色 */
+    }
+    #certificate {
+        width: 700px;
+        height: 500px;
+        border: 10px solid #4CAF50;
+        padding: 30px;
+        background: #fff url('456.png') repeat; /* 淡雅紙張紋理 */
+        background-size: cover;
+        text-align: center;
+        box-sizing: border-box;
+        position: relative;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    #certificate h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #4CAF50;
+    }
+    #certificate p {
+        font-size: 24px;
+        margin: 20px 0;
+    }
+    #displayName {
+        font-weight: bold;
+        font-size: 28px;
+        color: #333;
+        margin: 10px 0;
+    }
+    #inputArea {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    input[type="text"] {
+        font-size: 18px;
+        padding: 5px;
+        width: 300px;
+    }
+    button {
+        font-size: 18px;
+        padding: 8px 20px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    /* 輕微 SDGs 圖示裝飾 */
+    #certificate::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/SDG_icon_set.svg/512px-SDG_icon_set.svg.png') no-repeat;
+        background-position: bottom right;
+        background-size: 120px;
+        opacity: 0.15;
+        pointer-events: none;
+    }
+
+    @media print {
+        #inputArea, button {
+            display: none;
+        }
+        #certificate {
+            border: 10px solid #4CAF50;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            box-shadow: none;
+        }
+    }
+</style>
+</head>
+<body>
+<div>
+    <div id="inputArea">
+        <label for="username">請輸入您的姓名：</label>
+        <input type="text" id="username" placeholder="姓名">
+        <button onclick="generateCertificate()">生成證書</button>
+    </div>
+
+    <div id="certificate">
+        <h1>SDGs 性別平權小達人</h1>
+        <p id="displayName">（姓名）</p>
+        <p>恭喜您完成性別平權學習任務！</p>
+        <button onclick="downloadCertificate()">下載 / 列印證書</button>
+    </div>
+</div>
+
+<script>
+function generateCertificate() {
+    const name = document.getElementById('username').value.trim();
+    if(name === "") {
+        alert("請輸入姓名！");
+        return;
+    }
+    document.getElementById('displayName').textContent = name;
+}
+
+function downloadCertificate() {
+    const name = document.getElementById('displayName').textContent;
+    if(name === "（姓名）") {
+        alert("請先輸入姓名並生成證書！");
+        return;
+    }
+    window.print();
+}
+</script>
+</body>
+</html>
